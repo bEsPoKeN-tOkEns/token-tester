@@ -17,4 +17,9 @@ contract ExampleTest is Test, TokenTester {
         assertEq(testToken.balanceOf(address(this)), 0);
     }
 
+    function testTransfer(uint256 amount, uint256 index) public usesSingleToken(index) {
+        deal(address(testToken), address(this), amount);
+        testToken.transfer(address(0xBEEF), amount);
+        assertEq(testToken.balanceOf(address(this)), 0);
+    }
 }
