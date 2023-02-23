@@ -59,35 +59,38 @@ contract TokenTester is Test {
         tokens.push(address(new Upgradable(1)));
     }
 
-    event bytes4Emitter(bytes4);
-    event stringEmitter(string);
     modifier usesTT() {
+        // the ffi script will set `FORGE_TOKEN_TESTER_ID=n`
+        uint256 envTokenId = vm.envUint("FORGE_TOKEN_TESTER_ID");
+        if (envTokenId != 0) {
+            tokenTest = IERC20(tokens[envTokenId - 1]);
+
+            // Run the user's defined assertions against our cursed ERC20
+            _;
+        }
+
         bytes32 a;
-        bytes32 b;
         assembly {
             a := calldataload(0x0)
-            b := shr(224, calldataload(0x0))
-            // b := shr(calldataload(0x0), 0xe0)
         }
-        emit bytes4Emitter(bytes4(a));
-        emit stringEmitter(string(abi.encodePacked(a)));
-        emit stringEmitter(Strings.toHexString(uint256(a)));
+        // formatted: 0x724e4a0000000000000000000000000000
+        string memory functionSelector = Strings.toHexString(uint256(a));
+
+        string[] memory _ffi = new string[](2);
+        _ffi[0] = "script.sh";
+        _ffi[1] = functionSelector;
+
+        // Runs many `FORGE_TOKEN_TESTER_ID=n forge test --mt function_name` in parallel
+        try vm.ffi(_ffi) {
+            // parse successes and failures
+        } catch {}
 
         // bash script where function selector is converted to function string for `--mt`
         // i.e. testtoken.sh:
         // function_name = $( grep -r "724e4a00" out | grep "test" | cut -d: -f2 | cut -d\" -f2 | cut -d\( -f1 )
         // FORGE_TOKEN_ID=1 forge test --mt $function_name
-        
-        // in solidity/modifier:
-        // try vm.ffi(testtoken.sh) {
-
-        // } catch {
-
-        // }
-        _;
-
     }
-    
+
     modifier usesTokenTester() {
         uint256 i;
         for (i; i < tokens.length;) {
