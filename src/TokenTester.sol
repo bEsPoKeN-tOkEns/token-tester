@@ -5,6 +5,7 @@ import "forge-std/Test.sol";
 import {WETH} from "solmate/tokens/WETH.sol";
 import {MockERC20} from "./tokens/MockERC20.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
+import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
 // d-xo/weird-erc20
 import {ApprovalRaceToken} from "weird-erc20/Approval.sol";
@@ -29,7 +30,7 @@ import {Uint96ERC20} from "weird-erc20/Uint96.sol";
 import {Proxy as Upgradable} from "weird-erc20/Upgradable.sol";
 
 contract TokenTester is Test {
-    IERC20 public testToken;
+    IERC20 public tokenTest;
 
     address[] public tokens;
 
@@ -57,11 +58,40 @@ contract TokenTester is Test {
         tokens.push(address(new Uint96ERC20(0)));
         tokens.push(address(new Upgradable(1)));
     }
+
+    event bytes4Emitter(bytes4);
+    event stringEmitter(string);
+    modifier usesTT() {
+        bytes32 a;
+        bytes32 b;
+        assembly {
+            a := calldataload(0x0)
+            b := shr(224, calldataload(0x0))
+            // b := shr(calldataload(0x0), 0xe0)
+        }
+        emit bytes4Emitter(bytes4(a));
+        emit stringEmitter(string(abi.encodePacked(a)));
+        emit stringEmitter(Strings.toHexString(uint256(a)));
+
+        // bash script where function selector is converted to function string for `--mt`
+        // i.e. testtoken.sh:
+        // function_name = $( grep -r "724e4a00" out | grep "test" | cut -d: -f2 | cut -d\" -f2 | cut -d\( -f1 )
+        // FORGE_TOKEN_ID=1 forge test --mt $function_name
+        
+        // in solidity/modifier:
+        // try vm.ffi(testtoken.sh) {
+
+        // } catch {
+
+        // }
+        _;
+
+    }
     
     modifier usesTokenTester() {
         uint256 i;
         for (i; i < tokens.length;) {
-            testToken = IERC20(tokens[i]);
+            tokenTest = IERC20(tokens[i]);
             _;
             unchecked {
                 ++i;
@@ -70,7 +100,8 @@ contract TokenTester is Test {
     }
 
     modifier usesSingleToken(uint256 index) {
-        testToken = IERC20(tokens[bound(index, 0, tokens.length - 1)]);
+        vm.assume(index < tokens.length);
+        tokenTest = IERC20(tokens[index]);
         _;
     }
 }
