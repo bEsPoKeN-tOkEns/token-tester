@@ -40,7 +40,6 @@ contract TokenTester is Test {
         tokens.push(address(new ApprovalToZeroToken(0)));
         tokens.push(address(new BlockableToken(0)));
         tokens.push(address(new Bytes32Metadata(0)));
-        // TODO: look for a compiling Dai
         tokens.push(address(new DaiPermit(0)));
         tokens.push(address(new WeirdERC20(0)));
         tokens.push(address(new HighDecimalToken(0)));
@@ -56,7 +55,6 @@ contract TokenTester is Test {
         tokens.push(address(new TransferFeeToken(0, 0.001 ether)));
         tokens.push(address(new TransferFromSelfToken(0)));
         tokens.push(address(new Uint96ERC20(0)));
-        // TODO: figure out why its reverting on deployment
         tokens.push(address(new Upgradable(1)));
     }
     
