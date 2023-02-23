@@ -11,6 +11,7 @@ import {ApprovalRaceToken} from "weird-erc20/Approval.sol";
 import {ApprovalToZeroToken} from "weird-erc20/ApprovalToZero.sol";
 import {BlockableToken} from "weird-erc20/BlockList.sol";
 import {ERC20 as Bytes32Metadata} from "weird-erc20/Bytes32Metadata.sol";
+import {DaiPermit} from "weird-erc20/DaiPermit.sol";
 import {ERC20 as WeirdERC20} from "weird-erc20/ERC20.sol";
 import {HighDecimalToken} from "weird-erc20/HighDecimals.sol";
 import {LowDecimalToken} from "weird-erc20/LowDecimals.sol";
@@ -40,7 +41,7 @@ contract TokenTester is Test {
         tokens.push(address(new BlockableToken(0)));
         tokens.push(address(new Bytes32Metadata(0)));
         // TODO: look for a compiling Dai
-        // tokens.push(address(new DaiPermit(0)));
+        tokens.push(address(new DaiPermit(0)));
         tokens.push(address(new WeirdERC20(0)));
         tokens.push(address(new HighDecimalToken(0)));
         tokens.push(address(new LowDecimalToken(0)));
@@ -56,7 +57,7 @@ contract TokenTester is Test {
         tokens.push(address(new TransferFromSelfToken(0)));
         tokens.push(address(new Uint96ERC20(0)));
         // TODO: figure out why its reverting on deployment
-        // tokens.push(address(new Upgradable(0)));
+        tokens.push(address(new Upgradable(1)));
     }
     
     modifier usesTokenTester() {
