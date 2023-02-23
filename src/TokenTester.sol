@@ -35,28 +35,28 @@ contract TokenTester is Test {
     constructor() {
         tokens.push(address(new MockERC20("Test", "TST", 18)));
         tokens.push(address(new WETH()));
-        tokens.push(address(new ApprovalRaceToken(type(uint256).max)));
-        tokens.push(address(new ApprovalToZeroToken(type(uint256).max)));
-        tokens.push(address(new BlockableToken(type(uint256).max)));
-        tokens.push(address(new Bytes32Metadata(type(uint256).max)));
+        tokens.push(address(new ApprovalRaceToken(0)));
+        tokens.push(address(new ApprovalToZeroToken(0)));
+        tokens.push(address(new BlockableToken(0)));
+        tokens.push(address(new Bytes32Metadata(0)));
         // TODO: look for a compiling Dai
-        // tokens.push(address(new DaiPermit(type(uint256).max)));
-        tokens.push(address(new WeirdERC20(type(uint256).max)));
-        tokens.push(address(new HighDecimalToken(type(uint256).max)));
-        tokens.push(address(new LowDecimalToken(type(uint256).max)));
-        tokens.push(address(new MissingReturnToken(type(uint256).max)));
-        tokens.push(address(new NoRevertToken(type(uint256).max)));
-        tokens.push(address(new PausableToken(type(uint256).max)));
-        tokens.push(address(new ProxiedToken(type(uint256).max)));
-        tokens.push(address(new ReentrantToken(type(uint256).max)));
-        tokens.push(address(new ReturnsFalseToken(type(uint256).max)));
-        tokens.push(address(new RevertToZeroToken(type(uint256).max)));
-        tokens.push(address(new RevertZeroToken(type(uint256).max)));
-        tokens.push(address(new TransferFeeToken(type(uint256).max, 0.001 ether)));
-        tokens.push(address(new TransferFromSelfToken(type(uint256).max)));
-        tokens.push(address(new Uint96ERC20(type(uint96).max)));
+        // tokens.push(address(new DaiPermit(0)));
+        tokens.push(address(new WeirdERC20(0)));
+        tokens.push(address(new HighDecimalToken(0)));
+        tokens.push(address(new LowDecimalToken(0)));
+        tokens.push(address(new MissingReturnToken(0)));
+        tokens.push(address(new NoRevertToken(0)));
+        tokens.push(address(new PausableToken(0)));
+        tokens.push(address(new ProxiedToken(0)));
+        tokens.push(address(new ReentrantToken(0)));
+        tokens.push(address(new ReturnsFalseToken(0)));
+        tokens.push(address(new RevertToZeroToken(0)));
+        tokens.push(address(new RevertZeroToken(0)));
+        tokens.push(address(new TransferFeeToken(0, 0.001 ether)));
+        tokens.push(address(new TransferFromSelfToken(0)));
+        tokens.push(address(new Uint96ERC20(0)));
         // TODO: figure out why its reverting on deployment
-        // tokens.push(address(new Upgradable(type(uint256).max)));
+        // tokens.push(address(new Upgradable(0)));
     }
     
     modifier usesTokenTester() {
