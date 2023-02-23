@@ -13,7 +13,7 @@ contract ExampleTest is Test, TokenTester {
         counter.setNumber(0);
     }
 
-    function testDeposit() public usesTokenTester {
+    function testZero() public usesTokenTester {
         assertEq(testToken.balanceOf(address(this)), 0);
     }
 
