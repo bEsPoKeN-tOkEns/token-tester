@@ -34,31 +34,83 @@ contract TokenTester is Test {
 
     address[] public tokens;
     string[] public tokenNames;
+    string public tokenNameStr;
 
     constructor() {
         tokens.push(address(new MockERC20("Test", "TST", 18)));
         tokenNames.push("MockERC20");
+        
         tokens.push(address(new WETH()));
+        tokenNames.push("WETH");
+        
         tokens.push(address(new ApprovalRaceToken(0)));
+        tokenNames.push("ApprovalRaceToken");
+        
         tokens.push(address(new ApprovalToZeroToken(0)));
+        tokenNames.push("ApprovalToZeroToken");
+
         tokens.push(address(new BlockableToken(0)));
+        tokenNames.push("BlockableToken");
+
         tokens.push(address(new Bytes32Metadata(0)));
+        tokenNames.push("Bytes32Metadata");
+
         tokens.push(address(new DaiPermit(0)));
+        tokenNames.push("DaiPermit");
+
         tokens.push(address(new WeirdERC20(0)));
+        tokenNames.push("WeirdERC20");
+
         tokens.push(address(new HighDecimalToken(0)));
+        tokenNames.push("HighDecimalToken");
+
         tokens.push(address(new LowDecimalToken(0)));
+        tokenNames.push("LowDecimalToken");
+
         tokens.push(address(new MissingReturnToken(0)));
+        tokenNames.push("MissingReturnToken");
+
         tokens.push(address(new NoRevertToken(0)));
+        tokenNames.push("NoRevertToken");
+
         tokens.push(address(new PausableToken(0)));
+        tokenNames.push("PausableToken");
+
         tokens.push(address(new ProxiedToken(0)));
+        tokenNames.push("ProxiedToken");
+
         tokens.push(address(new ReentrantToken(0)));
+        tokenNames.push("ReentrantToken");
+
         tokens.push(address(new ReturnsFalseToken(0)));
+        tokenNames.push("ReturnsFalseToken");
+
         tokens.push(address(new RevertToZeroToken(0)));
+        tokenNames.push("RevertToZeroToken");
+
         tokens.push(address(new RevertZeroToken(0)));
+        tokenNames.push("RevertZeroToken");
+
         tokens.push(address(new TransferFeeToken(0, 0.001 ether)));
+        tokenNames.push("TransferFeeToken");
+
         tokens.push(address(new TransferFromSelfToken(0)));
+        tokenNames.push("TransferFromSelfToken");
+
         tokens.push(address(new Uint96ERC20(0)));
+        tokenNames.push("Uint96ERC20");
+
         tokens.push(address(new Upgradable(1)));
+        tokenNames.push("Upgradable");
+
+        uint256 i;
+        for (i; i < tokenNames.length;) {
+            tokenNameStr = string.concat(tokenNameStr, tokenNames[i]);
+            tokenNameStr = string.concat(tokenNameStr, ",");
+            unchecked {
+                ++i;
+            }
+        }
     }
 
     modifier usesTT() {
@@ -84,11 +136,12 @@ contract TokenTester is Test {
             string memory functionSelector = Strings.toHexString(uint256(a));
             string memory tokensLength = Strings.toHexString(uint256(tokens.length));
 
-            string[] memory _ffi = new string[](4);
+            string[] memory _ffi = new string[](5);
             _ffi[0] = "sh";
             _ffi[1] = "script.sh";
             _ffi[2] = functionSelector;
             _ffi[3] = tokensLength;
+            _ffi[4] = tokenNameStr;
 
             // Runs many `FORGE_TOKEN_TESTER_ID=n forge test --mt function_name` in parallel
             bytes memory ffi_result = vm.ffi(_ffi);
