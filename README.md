@@ -1,15 +1,18 @@
 # Token Tester
 
-:sparkles: *Automagically test a variety of tokens against your Solidity smart contracts* :sparkles:
+:sparkles: *Test a variety of unconventional tokens against your smart contracts* :sparkles:
+
+"Wow, it's just a modifier? Now that's *ergonomic*" -chad dev, probably
 
 ---
 
-Developing and implementing composability with various tokens in blockchain applications can be a daunting and an unnerving task, particularly in the DeFi space where security is a priority and the stakes are high. Token Tester is a tool designed to help developers ensure that their protocol contract logic is safe and secure when acting on various token implementations. Bridging the gap between perfect standards, imperfect implementations, and straight-up malicious tokens, Token Tester provides an ergonomic test suite of "bespoken tokens" that developers can use to test their protocol's contract logic.
-
 
 ## The Problem
-Developers face numerous challenges when implementing tokens, including issues with interoperability, security, and dealing with miscompliance according to popular standards. Hundreds[1] of[2] thousands[3] of[4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC20, ERC721, ERC777, and ERC4626 with more standards pending. Token Tester addresses these challenges by providing a suite of "bespoken tokens" that encompass this range and more, including tokens with fee-on-transfer logic, tokens with re-entrancy vulnerabilities, and tokens with malicious implementations.
+Developers face the challenge of unknowingly interfacing with miscompliant tokens. Hundreds[1] of[2] thousands[3] of[4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC20, ERC721, ERC777, and ERC4626 with more standards pending.
 
+Token Tester provides a suite of *bespoke tokens* that encompass this range of standards and more, including tokens with fee-on-transfer logic, tokens with re-entrancy vulnerabilities, and tokens with malicious implementations.
+
+## Footgun tokens
 Our full catalog of tokens can be found here:
 - weird-erc20
 - ...
@@ -39,7 +42,7 @@ Install *token-tester*:
 forge install bespoke-tokens/token-tester
 ```
 
-Decorate your test functions with the TokenTester modifier
+*Decorate your test functions with the TokenTester modifier(s)*
 ```solidity
 import "forge-std/Test.sol";
 import {TokenTester} from "token-tester/TokenTester.sol";
@@ -62,7 +65,7 @@ contract ExampleTest is Test, TokenTester {
 
 ```
 
-Execute token tester against your existing Foundry unit tests
+Enable token tester when running Foundry unit tests:
 ```bash
 TOKEN_TEST=true; forge test --ffi
 
