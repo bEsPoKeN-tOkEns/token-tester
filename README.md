@@ -1,5 +1,10 @@
 # Token Tester
-Developing and implementing composability with various tokens in blockchain applications can be a daunting and unnerving task, particularly in the DeFi space where security is a priority and the stakes are high. Token Tester is a tool designed to help developers ensure that their protocol contract logic is safe and secure when acting on various token implementations. Bridging the gap between perfect standards, imperfect implementations, and straight-up malicious tokens, Token Tester provides an ergonomic test suite of "bespoken tokens" that developers can use to test their protocol's contract logic.
+
+:sparkles: *Automagically test a variety of tokens against your Solidity smart contracts* :sparkles:
+
+---
+
+Developing and implementing composability with various tokens in blockchain applications can be a daunting and an unnerving task, particularly in the DeFi space where security is a priority and the stakes are high. Token Tester is a tool designed to help developers ensure that their protocol contract logic is safe and secure when acting on various token implementations. Bridging the gap between perfect standards, imperfect implementations, and straight-up malicious tokens, Token Tester provides an ergonomic test suite of "bespoken tokens" that developers can use to test their protocol's contract logic.
 
 
 ## The Problem
@@ -26,7 +31,43 @@ Token Tester can be used in a variety of scenarios, including:
 
 TODO:cite AMP rebasing swap event
 
+## Get Started & Usage
 
+Install *token-tester*:
+
+```bash
+forge install bespoke-tokens/token-tester
+```
+
+Decorate your test functions with the TokenTester modifier
+```solidity
+import "forge-std/Test.sol";
+import {TokenTester} from "token-tester/TokenTester.sol";
+
+contract ExampleTest is Test, TokenTester {
+    function setUp() public {
+        // initialize your contract
+    }
+    
+    // Test drive the unit test with multiple ERC20 implementations
+    // the modifier `usesERC20TokenTester` and `tokenTest` is inherited from `TokenTester.sol`
+    function testDeposit() public usesERC20TokenTester {
+        // deal yourself some tokens to test deposit behavior
+        deal(address(tokenTest), address(this), 100);
+        
+        // use the provided `tokenTest` (an ERC20) against the contracts
+        myContract.deposit(address(tokenTest), 100);
+    }
+}
+
+```
+
+Execute token tester against your existing Foundry unit tests
+```bash
+TOKEN_TEST=true; forge test --ffi
+
+# view report.html in your browser
+```
 
 ## How Token Tester Works
 Token Tester is powered by Foundry, and comes packaged in a git submodule that can be installed directly into a Foundry project. A `TokenTester` contract is provided and is designed to be inherited by any testing contract, similar to common tools like `forge-std/Test` and `forge-std/Script`. 
@@ -34,14 +75,3 @@ Token Tester is powered by Foundry, and comes packaged in a git submodule that c
 Incorporating the logic into tests requires adding a modifier to an existing testing function, and using an inherited variable named `testToken` as the token. From here, Token Tester handles the rest, including deploying the bespoken tokens, running the test and tracking results.
 
 Results are outputted in HTML format, making them easy to understand and share with others.
-
-## Get Started with Token Tester
-Within your Foundry project:
-
-```
-forge install bespoken-tokens/token-tester
-
-TOKEN_TEST=true; forge test --ffi
-
-# view token-tester.html in your browser
-```
