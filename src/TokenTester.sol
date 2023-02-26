@@ -114,6 +114,15 @@ contract TokenTester is Test {
     }
 
     modifier usesTT() {
+        // short circuit if TOKEN_TEST is not enabled
+        bool enabled = vm.envBool("TOKEN_TEST");
+        if (!enabled) {
+            // default to MockERC20
+            tokenTest = IERC20(address(tokens[0]));
+            _;
+            return;
+        }
+
         // the ffi script will set `FORGE_TOKEN_TESTER_ID=n`
         uint envTokenId;
 
@@ -144,34 +153,8 @@ contract TokenTester is Test {
             _ffi[4] = tokenNameStr;
 
             // Runs many `FORGE_TOKEN_TESTER_ID=n forge test --mt function_name` in parallel
-            bytes memory ffi_result = vm.ffi(_ffi);
-
-            assembly {
-                for { let i := 0 } lt(i, sload(tokens.slot)) { i := add(i, 2) } {
-                    let first_byte := byte(0, mload(add(ffi_result, add(0x20, i))))
-                    if iszero(eq(first_byte, 0x0)) {
-                        let token_name := mload(add(tokenNames.slot, add(0x20, i)))
-                        let token_address := mload(add(tokens.slot, add(0x20, i)))
-                        let success := mload(add(0x20, first_byte))
-                        if eq(success, 0x30) {
-                            // token failed
-                        } 
-                        if eq(success, 0x31) {
-                            // token passed
-                            
-                        }
-                    }
-                }
-            }
-
-
-            // bash script where function selector is converted to function string for `--mt`
-            // i.e. testtoken.sh:
-            // function_name = $( grep -r "724e4a00" out | grep "test" | cut -d: -f2 | cut -d\" -f2 | cut -d\( -f1 )
-            // FORGE_TOKEN_ID=1 forge test --mt $function_name
+            vm.ffi(_ffi);
         }
-
-        
     }
 
     modifier usesTokenTester() {
