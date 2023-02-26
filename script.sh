@@ -32,12 +32,17 @@ read -r -d '' static_html << EOM
         border-collapse: collapse;
         width: 100%;
       }
-      th, td {
+      th {
+        text-align: left;
+        padding: 8px;
+        font-size: 1.2em;
+      }
+      td {
         text-align: left;
         padding: 8px;
       }
       th {
-        background-color: #4CAF50;
+        background-color: #bb9af7;
         color: white;
       }
       tr:nth-child(even) {
@@ -45,17 +50,24 @@ read -r -d '' static_html << EOM
       }
       /* Add some styling to the status column */
       .success {
-        color: green;
+        color: #9ece6a;
         font-size: 1.5em;
       }
       .failure {
-        color: red;
+        color: #f7768e;
         font-size: 1.5em;
+      }
+      body {
+        width: 66%;
+        text-align: center;
+        margin: 0 auto;
+        color: #1a1b26;
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
       }
     </style>
   </head>
   <body>
-    <h1>Example Table</h1>
+    <h1>Token Tester Results</h1>
     <table>
       <tr>
         <th>Test</th>
