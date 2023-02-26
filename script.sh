@@ -3,6 +3,9 @@ function_selector_0x=$1
 amount_of_tokens=$2
 token_names_csv=$3
 
+# current directory of the script
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
 # split the token names into an array, using comma delimiter
 IFS=',' read -r -a token_names <<< "$token_names_csv"
 for element in "${token_names[@]}"
@@ -92,9 +95,9 @@ do
     # write a table-row to the static HTML
     table_row=$(printf '<tr>
         <td>%s</td>
-        <td>%s</td>
+        <td><a href="vscode://file/%s/lib/weird-erc20/src/%s.sol">%s</a></td>
         <td><span class="%s">&#10004;</span></td>
-      </tr>' "$function_name" "${token_names[$i]}" "$class")
+      </tr>' "$function_name" "$DIR" "${token_names[$i]}" "${token_names[$i]}" "$class")
     static_html+="$table_row"
 
 done
