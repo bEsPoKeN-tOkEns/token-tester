@@ -35,6 +35,6 @@ do
     class=$( [ "${result}" -eq 1 ] && echo "failure" || echo "success" )
 
     python3 $DIR/runner.py --test-name $function_name --token-name ${token_names[$i-1]} --result $class
-
+    wait
 done
 
