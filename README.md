@@ -12,7 +12,7 @@
 
 "What do you mean you only tested with USDC?"
 
--anime "never-been-hacked" anon, probably
+-anon anime-pfp, probably
 
 
 
