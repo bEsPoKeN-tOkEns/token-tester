@@ -13,24 +13,24 @@
 Install *token-tester*:
 
 ```bash
-forge install bespoke-tokens/token-tester
+forge install bespoken-tokens/token-tester
 ```
 
 *Decorate your test functions with the TokenTester modifier(s)*
 ```solidity
 import "forge-std/Test.sol";
 
-// *-*-*-*-* Import TokenTester *-*-*-*-*
+// ------ Import TokenTester ------
 import {TokenTester} from "token-tester/TokenTester.sol";
 
-// *-*-*-*-* Inherit the TokenTester contract *-*-*-*-*
+// ------ Inherit the TokenTester contract ------
 contract ExampleTest is Test, TokenTester {
     function setUp() public {
         // initialize your contract
     }
     
-    // *-*-*-*-* Decorate your test with `usesERC20TokenTester`                       *-*-*-*-*
-    // *-*-*-*-* The test is executed 22 times, each time with a different test token *-*-*-*-*
+    // ------ Decorate your test with `usesERC20TokenTester`                       ------
+    // ------ The test is executed 22 times, each time with a different test token ------
     function testDeposit() public usesERC20TokenTester {
         deal(address(tokenTest), address(this), 100);
         
