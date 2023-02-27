@@ -4,7 +4,7 @@
 
 "Wow, it's just a modifier? Now that's *ergonomic*"
 
--chad dev, probably
+-chad dev
 
 ---
 
@@ -12,7 +12,7 @@
 
 "What do you mean you only tested with USDC?"
 
--anon anime-pfp, probably
+-anon anime-pfp
 
 
 
