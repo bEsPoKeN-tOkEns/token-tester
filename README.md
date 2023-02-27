@@ -100,4 +100,4 @@ We also hope to procure deployed tokens to expand the Token Test Pool
 [^2]: [88mph / fee-on-transfer](https://code4rena.com/reports/2021-05-88mph/#m-01-incompatability-with-deflationary--fee-on-transfer-tokens)
 [^3]: [Caviar / reentrancy via ERC-777](https://code4rena.com/reports/2022-12-caviar/#h-01-reentrancy-in-buy-function-for-erc777-tokens-allows-buying-funds-with-considerable-discount)
 [^4]: [Rari Fuse / reentrancy via cETH](https://www.certik.com/resources/blog/6LiXVtPQ8q5AQfqOUPnTOS-revisiting-fei-protocol-incident)
-[^5]: [Sushi Trident / incorrectly handling EIP-2612 Permit)(https://code4rena.com/reports/2021-09-sushitrident-2#m-05-tridentnftpermit-should-always-check-recoveredaddress--0)
+[^5]: [Sushi Trident / incorrectly handling EIP-2612 Permit](https://code4rena.com/reports/2021-09-sushitrident-2#m-05-tridentnftpermit-should-always-check-recoveredaddress--0)
