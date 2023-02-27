@@ -2,8 +2,16 @@ table_record = """
     <tr>
         <td>{test_name}</td>
         <td><a href="vscode://file{dir_path}/lib/weird-erc20/src/{token_file}.sol">{token_name}</a></td>
-        <td><span class="{status}">&#10004;</span></td>
+        <td><span class="{status}">{status_emoji}</span></td>
     </tr>
+"""
+
+sub_header = """
+      <tr>
+        <th class="subheader">{test_name}</th>
+        <th class="subheader"></th>
+        <th class="subheader"></th>
+      </tr>
 """
 
 html_template ="""
@@ -35,6 +43,10 @@ html_template ="""
         background-color: #f2f2f2;
       }}
       /* Add some styling to the status column */
+      .subheader {{
+        background-color: #2ac3de;
+        color: white;
+      }}
       .success {{
         color: #9ece6a;
         font-size: 1.5em;

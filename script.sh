@@ -6,6 +6,9 @@ token_names_csv=$3
 # current directory of the script
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# create the python-out directory if it doesn't exist
+mkdir -p $DIR/python-out
+
 # split the token names into an array, using comma delimiter
 IFS=',' read -r -a token_names <<< "$token_names_csv"
 for element in "${token_names[@]}"
@@ -35,6 +38,6 @@ do
     class=$( [ "${result}" -eq 1 ] && echo "failure" || echo "success" )
 
     python3 $DIR/runner.py --test-name $function_name --token-name ${token_names[$i-1]} --result $class
-
+    wait
 done
 

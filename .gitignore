@@ -12,3 +12,4 @@ docs/
 
 *.html
 data.json
+python-out/*.json

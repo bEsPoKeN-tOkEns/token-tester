@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Test.sol";
 import {WETH} from "solmate/tokens/WETH.sol";
-import {MockERC20} from "./tokens/MockERC20.sol";
+import {BaseERC20} from "./tokens/BaseERC20.sol";
 import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
 import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
 
@@ -37,15 +37,15 @@ contract TokenTester is Test {
     string public tokenNameStr;
 
     constructor() {
-        tokens.push(address(new MockERC20("Test", "TST", 18)));
-        tokenNames.push("MockERC20");
-        
+        tokens.push(address(new BaseERC20("Test", "TST", 18)));
+        tokenNames.push("BaseERC20");
+
         tokens.push(address(new WETH()));
         tokenNames.push("WETH");
-        
+
         tokens.push(address(new ApprovalRaceToken(0)));
         tokenNames.push("ApprovalRaceToken");
-        
+
         tokens.push(address(new ApprovalToZeroToken(0)));
         tokenNames.push("ApprovalToZeroToken");
 
@@ -113,25 +113,24 @@ contract TokenTester is Test {
         }
     }
 
-    modifier usesTT() {
+    modifier usesERC20TokenTester() {
         // short circuit if TOKEN_TEST is not enabled
         bool enabled = vm.envBool("TOKEN_TEST");
         if (!enabled) {
-            // default to MockERC20
+            // default to BaseERC20
             tokenTest = IERC20(address(tokens[0]));
             _;
             return;
         }
 
         // the ffi script will set `FORGE_TOKEN_TESTER_ID=n`
-        uint envTokenId;
+        uint256 envTokenId;
 
         try vm.envUint("FORGE_TOKEN_TESTER_ID") {
             envTokenId = vm.envUint("FORGE_TOKEN_TESTER_ID");
         } catch {}
 
         if (envTokenId != 0) {
-
             tokenTest = IERC20(tokens[envTokenId - 1]);
 
             // Run the user's defined assertions against our cursed ERC20
