@@ -44,13 +44,13 @@ contract TokenTester is Test {
         tokenNames.push("WETH");
 
         tokens.push(address(new ApprovalRaceToken(0)));
-        tokenNames.push("ApprovalRaceToken");
+        tokenNames.push("Approval");
 
         tokens.push(address(new ApprovalToZeroToken(0)));
-        tokenNames.push("ApprovalToZeroToken");
+        tokenNames.push("ApprovalToZero");
 
         tokens.push(address(new BlockableToken(0)));
-        tokenNames.push("BlockableToken");
+        tokenNames.push("BlockList");
 
         tokens.push(address(new Bytes32Metadata(0)));
         tokenNames.push("Bytes32Metadata");
@@ -62,43 +62,43 @@ contract TokenTester is Test {
         tokenNames.push("WeirdERC20");
 
         tokens.push(address(new HighDecimalToken(0)));
-        tokenNames.push("HighDecimalToken");
+        tokenNames.push("HighDecimals");
 
         tokens.push(address(new LowDecimalToken(0)));
-        tokenNames.push("LowDecimalToken");
+        tokenNames.push("LowDecimals");
 
         tokens.push(address(new MissingReturnToken(0)));
-        tokenNames.push("MissingReturnToken");
+        tokenNames.push("MissingReturns");
 
         tokens.push(address(new NoRevertToken(0)));
-        tokenNames.push("NoRevertToken");
+        tokenNames.push("NoRevert");
 
         tokens.push(address(new PausableToken(0)));
-        tokenNames.push("PausableToken");
+        tokenNames.push("Pausable");
 
         tokens.push(address(new ProxiedToken(0)));
-        tokenNames.push("ProxiedToken");
+        tokenNames.push("Proxied");
 
         tokens.push(address(new ReentrantToken(0)));
-        tokenNames.push("ReentrantToken");
+        tokenNames.push("Reentrant");
 
         tokens.push(address(new ReturnsFalseToken(0)));
-        tokenNames.push("ReturnsFalseToken");
+        tokenNames.push("ReturnsFalse");
 
         tokens.push(address(new RevertToZeroToken(0)));
-        tokenNames.push("RevertToZeroToken");
+        tokenNames.push("RevertToZero");
 
         tokens.push(address(new RevertZeroToken(0)));
-        tokenNames.push("RevertZeroToken");
+        tokenNames.push("RevertZero");
 
         tokens.push(address(new TransferFeeToken(0, 0.001 ether)));
-        tokenNames.push("TransferFeeToken");
+        tokenNames.push("TransferFee");
 
         tokens.push(address(new TransferFromSelfToken(0)));
-        tokenNames.push("TransferFromSelfToken");
+        tokenNames.push("TransferFromSelf");
 
         tokens.push(address(new Uint96ERC20(0)));
-        tokenNames.push("Uint96ERC20");
+        tokenNames.push("Uint96");
 
         tokens.push(address(new Upgradable(1)));
         tokenNames.push("Upgradable");
