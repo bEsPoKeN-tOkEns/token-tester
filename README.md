@@ -52,7 +52,9 @@ TOKEN_TEST=true; forge test --ffi
 TODO: include html screenshot
 
 ## Why Token Tester is Useful
-Developers face the challenge of unknowingly interfacing with miscompliant tokens. Hundreds[1] of[2] thousands[3] of[4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC-20, ERC-721, ERC-777, and ERC-4626 with more standards pending.
+Developers face the challenge of *unknowingly interfacing with miscompliant tokens.*
+
+Hundreds[^1] of[2] thousands[3] of[4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC-20, ERC-721, ERC-777, and ERC-4626 with more standards pending.
 
 Token Tester provides a suite of *bespoke tokens* that encompass this range of standards and more, including tokens with fee-on-transfer logic, tokens with re-entrancy vulnerabilities, and tokens with malicious implementations.
 
@@ -80,6 +82,13 @@ TODO:cite AMP rebasing swap event
 
 ## Future Work
 
-Token Tester was started as a hackathon project for ETHDenver 2023. If useful, our intention is to expand our token-standards (to include ERC-721, ERC-1155, ERC-777, and ERC-4626.
+Token Tester was started as a hackathon project for ETHDenver 2023. If useful, our intention is to expand our token-standards (to include ERC-721, ERC-1155, ERC-777, and ERC-4626)
 
 We also hope to procure deployed tokens to expand the Token Test Pool
+
+
+---
+
+Foot notes:
+
+[^1]: [prePO approval-to-zero](https://code4rena.com/reports/2022-03-prepo/#l-02-the-contract-should-approve0-first)
