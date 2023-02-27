@@ -54,7 +54,7 @@ TODO: include html screenshot
 ## Why Token Tester is Useful
 Developers face the challenge of *unknowingly interfacing with miscompliant tokens.*
 
-Hundreds[^1] of[2] thousands[3] of[4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC-20, ERC-721, ERC-777, and ERC-4626 with more standards pending.
+Hundreds[^1] of[^2] thousands[^3] of[^4] dollars[5]  in audits and bug bounties have been paid out for logical errors regarding token integrations. ERC standards are a growing list, now comprised of ERC-20, ERC-721, ERC-777, and ERC-4626 with more standards pending.
 
 Token Tester provides a suite of *bespoke tokens* that encompass this range of standards and more, including tokens with fee-on-transfer logic, tokens with re-entrancy vulnerabilities, and tokens with malicious implementations.
 
@@ -89,6 +89,7 @@ We also hope to procure deployed tokens to expand the Token Test Pool
 
 ---
 
-Foot notes:
-
 [^1]: [prePO approval-to-zero](https://code4rena.com/reports/2022-03-prepo/#l-02-the-contract-should-approve0-first)
+[^2]: [88mph fee-on-transfer](https://code4rena.com/reports/2021-05-88mph/#m-01-incompatability-with-deflationary--fee-on-transfer-tokens)
+[^3]: [Caviar reentrancy via ERC-777](https://code4rena.com/reports/2022-12-caviar/#h-01-reentrancy-in-buy-function-for-erc777-tokens-allows-buying-funds-with-considerable-discount)
+[^4]: [Rari Fuse reentrancy via cETH](https://www.certik.com/resources/blog/6LiXVtPQ8q5AQfqOUPnTOS-revisiting-fei-protocol-incident)
