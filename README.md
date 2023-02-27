@@ -8,6 +8,16 @@
 
 ---
 
+![image](https://user-images.githubusercontent.com/98790946/221658638-6614ab47-970f-4590-898b-99da45b431e5.png)
+
+"What do you mean you only tested with USDC?"
+
+-anime "never-been-hacked" anon, probably
+
+
+
+---
+
 ## Get Started & Usage
 
 Install *token-tester*:
@@ -63,9 +73,6 @@ Our full catalog of tokens can be found here:
 - [weird-erc20](https://github.com/d-xo/weird-erc20)
 - More soon, which includes actually-deployed contracts
 
-
-TODO: cite code4rena and immunefi reports. Rari vault re-entrancy with cETH was 1 million
-TODO: add more to catalog?
 
 ## Use Cases
 Token Tester can be used in a variety of scenarios, including:
