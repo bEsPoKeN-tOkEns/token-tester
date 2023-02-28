@@ -146,9 +146,20 @@ contract TokenTester is Test {
             string memory functionSelector = Strings.toHexString(uint256(a));
             string memory tokensLength = Strings.toHexString(uint256(tokens.length));
 
+            // devMode = false means we should call the script from `lib/token-tester/script.sh`
+            // devMode = true means we should call the script from the root repo `script.sh`
+            bool devMode;
+            string memory scriptInvokation = "lib/token-tester/script.sh";
+            try vm.envBool("TOKEN_TEST_DEV_MODE") {
+                devMode = vm.envBool("TOKEN_TEST_DEV_MODE");
+                if (devMode) {
+                    scriptInvokation = "script.sh";
+                }
+            } catch {}
+
             string[] memory _ffi = new string[](5);
             _ffi[0] = "sh";
-            _ffi[1] = "script.sh";
+            _ffi[1] = scriptInvokation;
             _ffi[2] = functionSelector;
             _ffi[3] = tokensLength;
             _ffi[4] = tokenNameStr;

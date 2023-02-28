@@ -27,7 +27,7 @@ contract ExampleTest is Test, TokenTester {
         tokenTest.approve(address(vault), 100);
         vault.deposit(100, alice);
         vm.stopPrank();
-        
+
         // if successful, alice owns ERC4626 vault tokens
         assertEq(vault.balanceOf(alice) != 0, true);
     }
