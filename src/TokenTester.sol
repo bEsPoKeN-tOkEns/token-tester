@@ -4,8 +4,8 @@ pragma solidity ^0.8.13;
 import "forge-std/Test.sol";
 import {WETH} from "solmate/tokens/WETH.sol";
 import {BaseERC20} from "./tokens/BaseERC20.sol";
-import {IERC20} from "openzeppelin-contracts/contracts/token/ERC20/IERC20.sol";
-import {Strings} from "openzeppelin-contracts/contracts/utils/Strings.sol";
+import {IERC20} from "openzeppelin-contracts/token/ERC20/IERC20.sol";
+import {Strings} from "openzeppelin-contracts/utils/Strings.sol";
 
 // d-xo/weird-erc20
 import {ApprovalRaceToken} from "weird-erc20/Approval.sol";
@@ -19,7 +19,7 @@ import {LowDecimalToken} from "weird-erc20/LowDecimals.sol";
 import {MissingReturnToken} from "weird-erc20/MissingReturns.sol";
 import {NoRevertToken} from "weird-erc20/NoRevert.sol";
 import {PausableToken} from "weird-erc20/Pausable.sol";
-import {ProxiedToken} from "weird-erc20/Proxied.sol";
+import {ProxiedToken, TokenProxy} from "weird-erc20/Proxied.sol";
 import {ReentrantToken} from "weird-erc20/Reentrant.sol";
 import {ReturnsFalseToken} from "weird-erc20/ReturnsFalse.sol";
 import {RevertToZeroToken} from "weird-erc20/RevertToZero.sol";
@@ -76,7 +76,9 @@ contract TokenTester is Test {
         tokens.push(address(new PausableToken(0)));
         tokenNames.push("Pausable");
 
-        tokens.push(address(new ProxiedToken(0)));
+        ProxiedToken proxied = new ProxiedToken(0);
+        TokenProxy proxy = new TokenProxy(address(proxied));
+        tokens.push(address(proxy));
         tokenNames.push("Proxied");
 
         tokens.push(address(new ReentrantToken(0)));
