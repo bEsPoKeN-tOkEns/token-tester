@@ -36,15 +36,18 @@ html_template ="""
         padding: 8px;
       }}
       th {{
-        background-color: #bb9af7;
+        background-color: #777;
         color: white;
       }}
       tr:nth-child(even) {{
-        background-color: #f2f2f2;
+        background-color: #444;
+      }}
+      tr:nth-child(odd) {{
+        background-color: #333;
       }}
       /* Add some styling to the status column */
       .subheader {{
-        background-color: #2ac3de;
+        background-color: #565f89;
         color: white;
       }}
       .success {{
@@ -59,8 +62,12 @@ html_template ="""
         width: 66%;
         text-align: center;
         margin: 0 auto;
-        color: #1a1b26;
+        color: #fff;
         font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        background-color: #222;
+      }}
+      a {{
+        color: #00a3ff;
       }}
     </style>
   </head>
