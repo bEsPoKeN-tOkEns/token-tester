@@ -55,11 +55,12 @@ contract ExampleTest is Test, TokenTester {
 Enable token tester when running Foundry unit tests:
 ```bash
 TOKEN_TEST=true; forge test --ffi
-
-# view report.html in your browser
 ```
 
-TODO: include html screenshot
+Example report.html:
+
+<img width="800" alt="Screenshot 2023-03-03 at 10 35 01 AM" src="https://user-images.githubusercontent.com/98790946/222789188-d80d41c5-4cc0-4458-bb27-eb0e8f6eaf4b.png">
+
 
 ## Why Token Tester is Useful
 Developers face the challenge of *unknowingly interfacing with miscompliant tokens.*
