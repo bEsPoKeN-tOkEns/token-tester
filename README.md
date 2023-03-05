@@ -54,7 +54,7 @@ contract ExampleTest is Test, TokenTester {
 
 Enable token tester when running Foundry unit tests:
 ```bash
-TOKEN_TEST=true; forge test --ffi
+TOKEN_TEST=true forge test --ffi
 ```
 
 Example report.html:
